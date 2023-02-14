@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/blablaCar-clone";
 
 mongoose.connect(MONGODB_URI)
 .then(() => console.info(`Successfully connected to data base ${MONGODB_URI}`))

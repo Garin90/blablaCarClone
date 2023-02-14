@@ -17,7 +17,7 @@ const tripSchema = new Schema({
     required: true
   },
   price: {
-    type: String,
+    type: Number,
     required: true
   },
   date: {
@@ -25,7 +25,7 @@ const tripSchema = new Schema({
     required: true
   },
   seats: {
-    type: String,
+    type: Number,
     required: true
   },
   car: {
