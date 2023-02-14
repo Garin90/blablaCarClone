@@ -5,12 +5,18 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 
+//static files set up
+app.use(express.static(`${__dirname}/public`));
+
 //hbs config pointing to views folder
 app.set('view engine', 'hbs');
 app.set('views', `${__dirname}/views`);
 
+//requiring hbs config for call hbs partials and helpers
+require('./configs/hbs.config');
+
 //Lines for be able to use routes file every http request
-const router = require('./configs/routes');
+const router = require('./configs/routes.config');
 app.use(router);
 
 //Conection with express server using port 3000.
