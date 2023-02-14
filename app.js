@@ -9,7 +9,10 @@ const app = express();
 app.set('view engine', 'hbs');
 app.set('views', `${__dirname}/views`);
 
+//Lines for be able to use routes file every http request
+const router = require('./configs/routes');
+app.use(router);
 
-// Conection with express server using port 3000.
+//Conection with express server using port 3000.
 const port = process.env.PORT || "3000";
 app.listen(port, () => console.log(`Application running at port ${3000}`));
