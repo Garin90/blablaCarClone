@@ -1,6 +1,9 @@
 //requiring .env file
 require('dotenv').config();
 
+//requiring data base configuration
+require('./configs/db.config')
+
 //requiring express & app constant creation based on express framework
 const express = require('express');
 const app = express();
