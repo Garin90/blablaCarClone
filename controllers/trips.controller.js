@@ -25,8 +25,8 @@ module.exports.create = (req, res, next) => {
 
 module.exports.doCreate = (req,res,next) => {
   Trip.create(req.body)
-  .then(() => 
+  .then(() => {
     res.redirect('/trips')
-  )
+  })
   .catch(next);
 }

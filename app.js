@@ -8,6 +8,13 @@ require('./configs/db.config')
 const express = require('express');
 const app = express();
 
+//requiring morgan to show all the http requests in terminal
+const logger = require('morgan');
+app.use(logger('dev'));
+
+//Using this method to be able to save form inputs in req.body
+app.use(express.urlencoded());
+
 //static files set up
 app.use(express.static(`${__dirname}/public`));
 

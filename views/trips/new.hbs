@@ -1,24 +1,39 @@
 <form action="/trips/new" method="POST">
- <fieldset disabled>
-    <legend>Disabled fieldset example</legend>
-    <div class="mb-3">
-      <label for="disabledTextInput" class="form-label">Disabled input</label>
-      <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
-    </div>
-    <div class="mb-3">
-      <label for="disabledSelect" class="form-label">Disabled select menu</label>
-      <select id="disabledSelect" class="form-select">
-        <option>Disabled select</option>
-      </select>
-    </div>
-    <div class="mb-3">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>
-        <label class="form-check-label" for="disabledFieldsetCheck">
-          Can't check this
-        </label>
-      </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </fieldset>
+  <legend>Creating a Trip</legend>
+  <div class="mb-3">
+    <label class="form-label">User</label>
+    <input type="text" name="user" class="form-control" placeholder="User here">
+  </div>
+
+  <div class="mb-3">
+    <label for="from" class="form-label">From</label>
+    <input type="text" name="from" class="form-control" placeholder="Origin city">
+  </div>
+
+  <div class="mb-3">
+    <label for="to" class="form-label">to</label>
+    <input type="text" name="to" class="form-control" placeholder="Destiny city">
+  </div>
+
+  <div class="mb-3">
+    <label for="disabledTextInput" class="form-label">Price</label>
+    <input type="number" name="price" class="form-control" placeholder="Price in €">
+  </div>
+
+  <div class="mb-3">
+    <label for="disabledTextInput" class="form-label">Trip start date</label>
+    <input type="text" name="date" class="form-control" placeholder="Starting date here">
+  </div>
+
+  <div class="mb-3">
+    <label for="disabledTextInput" class="form-label">Number of seats</label>
+    <input type="number" name="seats" class="form-control" placeholder="Number of seats here">
+  </div>
+
+  <div class="mb-3">
+    <label for="disabledTextInput" class="form-label">Comments:</label>
+    <textarea name="comments" class="form-control">Comments here</textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
