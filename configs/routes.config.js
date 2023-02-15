@@ -9,6 +9,7 @@ const tripsController = require('../controllers/trips.controller')
 router.get('/', commonsController.home);
 
 router.get('/trips', tripsController.list);
+router.get('/trips/:id', tripsController.detail);
 
 //exporting router for app.js calling.
 module.exports = router;
