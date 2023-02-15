@@ -1,1 +1,22 @@
-<h1>I'm the Trips List page</h1>
+<h1>Trips List</h1>
+<div class="d-flex align-items-center flex-column">
+  {{#each trips as |trip|}}
+  <a href="/trips/:id" class="nav-link card d-flex justify-content-center shadow p-1 mb-2 rounded-4" style="width: 90%;">
+    <div class="card-body">
+      <div class="d-flex">
+        <div>
+          <h6 class="card-subtitle mb-2 text-muted">{{trip.date}}</h6>
+        </div>
+        <div>
+          <h6 class="card-subtitle mb-2 text-muted">{{trip.from}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">{{trip.to}}</h6>
+        </div>
+        <h6 class="card-subtitle mb-2 text-muted ms-auto">{{trip.price}}</h6>
+      </div>
+  
+      <h6 class="card-subtitle mb-2 text-muted d-block">{{trip.user}}</h6>
+    </div>
+  </a>
+  {{/each}}
+</div>
+

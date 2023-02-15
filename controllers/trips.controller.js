@@ -1,4 +1,13 @@
-//defining actions for trips
+//we will need to apply some methods to the model, so we require the trips model
+const Trip = require('../models/trip.model');
+
+//DEFINING ACTIOS FOR APPLY TO TRIPS DATA BASE
+//Finding all trips to show it into trips list view
 module.exports.list = (req, res,next) => {
-  res.render('trips/list');
+  Trip.find()
+  .then((trips) => {
+    res.render('trips/list', { trips });
+  })
+  .catch(next);
 }
+
