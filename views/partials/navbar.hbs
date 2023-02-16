@@ -1,5 +1,5 @@
 <ul class="nav nav-pills d-flex justify-content-between py-1">
-
+  
   {{! dropdown menú }}
   <li class="nav-item dropdown px-2">
     <a
@@ -16,8 +16,18 @@
         height="24px"
       /></a>
     <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="/login">Iniciar sesión</a></li>
-      <li><a class="dropdown-item" href="/users/new">Registrarse</a></li>
+      {{#if currentUser.id}}
+      <li><a class="dropdown-item" href="#">Offer a ride</a></li>
+      <li><a class="dropdown-item" href="#">Your rides</a></li>
+      <li><a class="dropdown-item" href="#">Inbox</a></li>
+      <li><a class="dropdown-item" href="#">Profile</a></li>
+      <li><a class="dropdown-item" href="#">Transfers</a></li>
+      <li><a class="dropdown-item" href="#">Paymends & refunds</a></li>
+      <li><a class="dropdown-item" href="#">Log out</a></li>
+      {{else}}
+      <li><a class="dropdown-item" href="/login">Log in</a></li>
+      <li><a class="dropdown-item" href="/users/new">Sign up</a></li>
+      {{/if}}
     </ul>
   </li>
 
@@ -77,3 +87,5 @@
     </li>
   </div>
 </ul>
+
+<h1 class="d-flex justify-content-center">{{currentUser.user}}</h1>
