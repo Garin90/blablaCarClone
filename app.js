@@ -12,11 +12,18 @@ const app = express();
 const logger = require('morgan');
 app.use(logger('dev'));
 
+//requiring session object for use it below
+const { session } = require('./configs/session.config');
+
+
 //Using this method to be able to save form inputs in req.body
 app.use(express.urlencoded());
 
 //static files set up
 app.use(express.static(`${__dirname}/public`));
+
+//calling session creator
+app.use(session);
 
 //hbs config pointing to views folder
 app.set('view engine', 'hbs');

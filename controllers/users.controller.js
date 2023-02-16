@@ -20,7 +20,7 @@ module.exports.doLogin = (req, res, next) => {
   .then((user) => {
     bcrypt.compare(req.body.password, user.password)
     .then((ok) => {
-      //req.session.userId = user.id;
+      req.session.userId = user.id;
       res.redirect('/trips')
     })
     .catch(next)
