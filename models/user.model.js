@@ -12,7 +12,7 @@ const userSchema = new Schema ({
     required: true,
     match: /^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/,
     unique: true
-  }
+  },
   password: {
     type: String,
     required: true
