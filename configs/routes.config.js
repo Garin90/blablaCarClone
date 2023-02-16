@@ -17,5 +17,8 @@ router.get('/trips/:id', tripsController.detail);
 router.get('/users/new', usersController.create);
 router.post('/users/new', usersController.doCreate);
 
+router.get('/login', usersController.login);
+router.post('/login', usersController.doLogin);
+
 //exporting router for app.js calling.
 module.exports = router;
