@@ -25,7 +25,7 @@ module.exports.session = session({
   })
 });
 
-//We will create this middleware to send the coockies from server to the client (browser)
+//We will create this middleware asign the cookie id founded in data base to the user ID, and get all the user information.
 module.exports.loadSessionUser = (req, res, next) => {
   const { userId } = req.session;
   if(userId) {
