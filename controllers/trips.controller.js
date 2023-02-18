@@ -14,6 +14,7 @@ module.exports.list = (req, res, next) => {
 
 module.exports.detail = (req, res, next) => {
   Trip.findById(req.params.id)
+  .populate('user')
   .then((trip) => {
     res.render('trips/detail', { trip })
   })

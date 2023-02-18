@@ -1,5 +1,6 @@
 //requiring data base config
 require('../configs/db.config');
+
 //requiring the model to be able to compare and insert all the fields
 const Trip = require('../models/trip.model');
 
