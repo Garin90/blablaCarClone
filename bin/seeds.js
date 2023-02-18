@@ -1,23 +1,35 @@
-//requiring data base config
+// Requiring database to create the seed
 require('../configs/db.config');
 
-//requiring the model to be able to compare and insert all the fields
+// Requiring model to create the seed
 const Trip = require('../models/trip.model');
 
-//Script to delete all the content in trip data base and add new elements (10 in this case)
-Trip.deleteMany()
+// Requiring model to create the seed
+const User = require('../models/user.model');
+
+
+// Creating the seed with the User & trip
+User.deleteMany()
 .then(() => {
   for (let i = 0; i <= 10; i++) {
-    Trip.create({
-      user: `User ${i}`,
-      from: `City from ${i}`,
-      to: `City of destiny ${i}`,
-      price: 30,
-      date: `Date ${i}`,
-      seats: 3,
-      comments: `Comment ${i}`
-    }).then((Trip) => {
-      console.log(`Trip ${i} created`)
-    }).catch((error) => console.error(error))
+    User.create({
+      user: `name${i}`,
+      email: `email${i}@seeds.com`,
+      password: `12345678`,
+    })
+    .then(user => {
+        Trip.create({
+          user: user.id,
+          from: `City from ${i}`,
+          to: `City of destiny ${i}`,
+          price: 30,
+          date: `Date ${i}`,
+          seats: 3,
+          comments: `Comment ${i}`,
+        }).then((trip) => {
+          console.log(`trip ${i} created`)
+        }).catch((error) => console.error(error))
+      }
+    ).catch((error) => console.error(error))
   }
-})
+});
