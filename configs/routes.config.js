@@ -4,7 +4,8 @@ const router = express.Router();
 //You will need a constant for use actions defined inside controller files. 
 const commonsController = require('../controllers/commons.controller');
 const tripsController = require('../controllers/trips.controller');
-const usersController = require('../controllers/users.controller')
+const usersController = require('../controllers/users.controller');
+const storage = require('./storage.config');
 
 //Requiring this to be able to use the isAuthenticated middleware
 const secure = require('../middlewares/secure.mid')
@@ -22,7 +23,7 @@ router.post('/users/new', usersController.doCreate);
 router.get('/users/', secure.isAuthenticated, secure.isAdmin, usersController.list);
 router.get('/profile', secure.isAuthenticated, usersController.profile);
 router.get('/profile/edit', secure.isAuthenticated, usersController.update);
-router.post('/profile/edit/:id', secure.isAuthenticated, usersController.doUpdate);
+router.post('/profile/edit/:id', secure.isAuthenticated, storage.single('image'), usersController.doUpdate);
 
 router.get('/login', usersController.login);
 router.post('/login', usersController.doLogin);
