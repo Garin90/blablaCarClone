@@ -12,7 +12,20 @@ const ADMIN_USERS = (process.env.ADMIN_USERS || 'admin@example.org')
 const userSchema = new Schema ({
   user: {
     type: String,
-    required: true
+    required: true,
+    unique: true
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  birthdate: {
+    type: Date,
+    required: true,
   },
   email: {
     type: String,
@@ -29,6 +42,9 @@ const userSchema = new Schema ({
     type: String,
     enum: ['guest', 'admin'],
     default: 'guest'
+  },
+  image: {
+    type: String
   }
 })
 

@@ -9,11 +9,19 @@ const User = require('../models/user.model');
 
 
 // Creating the seed with the User & trip
+Trip.deleteMany()
+.then(() => console.log('trips deleted'))
+.catch((error) => console.error(error));
+
+
 User.deleteMany()
 .then(() => {
   for (let i = 0; i <= 10; i++) {
     User.create({
-      user: `name${i}`,
+      user: `user${i}`,
+      name: `name ${i}`,
+      lastName: `last name ${i}`,
+      birthdate: 16/07/1990, //DB is not saving right this date.
       email: `email${i}@seeds.com`,
       password: `12345678`,
     })
@@ -33,3 +41,11 @@ User.deleteMany()
     ).catch((error) => console.error(error))
   }
 });
+
+// User.create({
+//   user: 'admin',
+//   email: 'admin@example.org',
+//   password: `12345678`
+// })
+// .then(() => console.log('admin created'))
+// .catch((error) => console.error(error));

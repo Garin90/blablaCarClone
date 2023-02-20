@@ -33,3 +33,17 @@ module.exports.list = (req, res, next) => {
   .then((users) => res.render('users/list', { users }))
   .catch(next)
 }
+
+module.exports.profile = (req, res, next) => {
+  res.render('users/profile');
+}
+
+module.exports.update = (req, res, next) => {
+  res.render('users/edit');
+}
+
+module.exports.doUpdate = (req, res, next) => {
+  User.findByIdAndUpdate(req.params.id, req.body)
+    .then(() => res.redirect('/profile'))
+    .catch(next)
+}

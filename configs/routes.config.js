@@ -20,6 +20,9 @@ router.get('/trips/:id', tripsController.detail);
 router.get('/users/new', usersController.create);
 router.post('/users/new', usersController.doCreate);
 router.get('/users/', secure.isAuthenticated, secure.isAdmin, usersController.list);
+router.get('/profile', secure.isAuthenticated, usersController.profile);
+router.get('/profile/edit', secure.isAuthenticated, usersController.update);
+router.post('/profile/edit/:id', secure.isAuthenticated, usersController.doUpdate);
 
 router.get('/login', usersController.login);
 router.post('/login', usersController.doLogin);
