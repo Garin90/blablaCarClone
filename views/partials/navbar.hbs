@@ -10,9 +10,14 @@
       aria-expanded="false"
     ><img
         class="rounded-circle"
+        {{#if currentUser.image}}
+          src="{{currentUser.image}}"
+        {{else}}
         src="https://cdn.blablacar.com/kairos/assets/images/default-m-818bf2b20d4b06a052dd..svg"
+        {{/if}}
         alt=""
         data-testid="single-logo"
+        width="24px"
         height="24px"
       /></a>
     <ul class="dropdown-menu">
