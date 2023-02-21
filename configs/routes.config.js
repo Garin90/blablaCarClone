@@ -5,6 +5,7 @@ const router = express.Router();
 const commonsController = require('../controllers/commons.controller');
 const tripsController = require('../controllers/trips.controller');
 const usersController = require('../controllers/users.controller');
+//We are requiring cloudinary config for be able to play with a profile picture
 const storage = require('./storage.config');
 
 //Requiring this to be able to use the isAuthenticated middleware
