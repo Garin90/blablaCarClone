@@ -1,4 +1,5 @@
 //we will need to apply some methods to the model, so we require the trips model
+const { findByIdAndUpdate, findById } = require('../models/trip.model');
 const Trip = require('../models/trip.model');
 
 //DEFINING ACTIOS FOR APPLY TO TRIPS DATA BASE
@@ -34,3 +35,21 @@ req.body.user = req.user.id;
   })
   .catch(next);
 }
+
+module.exports.update = (req, res, next) => {
+  Trip.findById(req.params.id)
+  .then((trip) => {
+    res.render('trips/edit', { trip })
+  })
+  .catch(next)
+}
+
+module.exports.doUpdate = (req, res, next) => {
+  Trip.findByIdAndUpdate(req.params.id, req.body)
+    .then(() => res.redirect(`/trips/${req.params.id}`))
+    .catch(next)
+  }
+
+module.exports.delete = (req, res, next) => {
+  next();
+} 

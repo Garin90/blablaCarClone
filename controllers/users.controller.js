@@ -1,4 +1,5 @@
 const User = require('../models/user.model');
+const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 module.exports.create = (req, res, next) => {
@@ -8,7 +9,14 @@ module.exports.create = (req, res, next) => {
 module.exports.doCreate = (req, res, next) => {
   User.create(req.body)
   .then(() => res.redirect('/login'))
-  .catch(next);
+  .catch((error) => {
+      if (error instanceof mongoose.Error.ValidationError) {
+        //console.log(`date format: ${req.body.birthdate}`)
+        res.render("users/new", { errors: error.errors, user: req.body });
+      } else {
+        next(error);
+      }
+    });
 }
 
 module.exports.login = (req, res, next) => {

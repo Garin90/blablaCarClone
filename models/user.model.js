@@ -12,7 +12,7 @@ const ADMIN_USERS = (process.env.ADMIN_USERS || 'admin@example.org')
 const userSchema = new Schema ({
   user: {
     type: String,
-    required: true,
+    required: [true, 'User is required'],
     unique: true
   },
   name: {

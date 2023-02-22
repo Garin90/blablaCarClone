@@ -1,30 +1,38 @@
 <h1>New User form</h1>
 
+{{#if errors}}
+  <div class="alert alert-danger">
+    review form data
+  </div>
+{{/if}}
+
 <form action="/users/new" method="POST">
   <legend>Creating a Trip</legend>
   <div class="mb-3">
     <label class="form-label">User</label>
-    <input type="text" name="user" class="form-control" placeholder="User here">
+    <input type="text" value="{{user.user}}" name="user" class="form-control {{#if errors.user}}is-invalid{{/if}}" placeholder="User here">
+    {{#if errors.user}}<div class="invalid-feedback">{{errors.user}}</div>{{/if}}
   </div>
 
   <div class="mb-3">
     <label class="form-label">Name</label>
-    <input type="text" name="name" class="form-control" placeholder="Ypur name here">
+    <input type="text" value="{{user.name}}" name="name" class="form-control {{#if errors.name}}is-invalid{{/if}}" placeholder="Ypur name here">
+    {{#if errors.name}}<div class="invalid-feedback">{{errors.name}}</div>{{/if}}
   </div>
 
   <div class="mb-3">
     <label class="form-label">Last Name</label>
-    <input type="text" name="lastName" class="form-control" placeholder="Your Last Name here">
+    <input type="text" value="{{user.lastName}}" name="lastName" class="form-control {{#if errors.lastName}}is-invalid{{/if}}" placeholder="Your Last Name here">
   </div>
 
   <div class="mb-3">
     <label class="form-label">Birthdate</label>
-    <input type="date" name="birthdate" class="form-control" placeholder="Your birthdate here">
+    <input type="date" value="{{user.birthdate}}" name="birthdate" class="form-control {{#if errors.birthdate}}is-invalid{{/if}}"" placeholder="Your birthdate here">
   </div>
 
   <div class="mb-3">
     <label for="email" class="form-label">Email</label>
-    <input type="email" name="email" class="form-control" placeholder="Email here">
+    <input type="email" value="{{user.email}}" name="email" class="form-control {{#if errors.email}}is-invalid{{/if}}" placeholder="Email here">
   </div>
 
   <div class="mb-3">

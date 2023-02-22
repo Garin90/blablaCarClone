@@ -18,6 +18,9 @@ router.get('/trips', tripsController.list);
 router.get('/trips/new', secure.isAuthenticated, tripsController.create);
 router.post('/trips/new', secure.isAuthenticated, tripsController.doCreate);
 router.get('/trips/:id', tripsController.detail);
+router.get('/trips/edit/:id', secure.isAuthenticated, tripsController.update);
+router.post('/trips/edit/:id', secure.isAuthenticated, tripsController.doUpdate);
+router.post('/trips/delete/:id', tripsController.delete);
 
 router.get('/users/new', usersController.create);
 router.post('/users/new', usersController.doCreate);

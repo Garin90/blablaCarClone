@@ -1,0 +1,36 @@
+<h1>Edit Trip</h1>
+<form action="/trips/edit/{{trip.id}}" method="POST">
+  <legend>Creating a Trip</legend>
+
+  <div class="mb-3">
+    <label for="from" class="form-label">From</label>
+    <input type="text" value="{{trip.from}}" name="from" class="form-control" placeholder="Origin city">
+  </div>
+
+  <div class="mb-3">
+    <label for="to" class="form-label">to</label>
+    <input type="text" value="{{trip.to}}" name="to" class="form-control" placeholder="Destiny city">
+  </div>
+
+  <div class="mb-3">
+    <label for="disabledTextInput" class="form-label">Price</label>
+    <input type="number" value="{{trip.price}}" name="price" class="form-control" placeholder="Price in €">
+  </div>
+
+  <div class="mb-3">
+    <label for="disabledTextInput" class="form-label">Trip start date</label>
+    <input type="date" value="{{trip.date}}" name="date" class="form-control" placeholder="Starting date here">
+  </div>
+
+  <div class="mb-3">
+    <label for="disabledTextInput" class="form-label">Number of seats</label>
+    <input type="number" value="{{trip.seats}}" name="seats" class="form-control" placeholder="Number of seats here">
+  </div>
+
+  <div class="mb-3">
+    <label for="disabledTextInput" class="form-label">Comments:</label>
+    <textarea name="comments" value="{{trip.comments}}" class="form-control">Comments here</textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
