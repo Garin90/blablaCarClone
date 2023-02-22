@@ -1,5 +1,5 @@
 //we will need to apply some methods to the model, so we require the trips model
-const { findByIdAndUpdate, findById } = require('../models/trip.model');
+const { findByIdAndUpdate, findById, rawListeners } = require('../models/trip.model');
 const Trip = require('../models/trip.model');
 
 //DEFINING ACTIOS FOR APPLY TO TRIPS DATA BASE
@@ -45,11 +45,23 @@ module.exports.update = (req, res, next) => {
 }
 
 module.exports.doUpdate = (req, res, next) => {
-  Trip.findByIdAndUpdate(req.params.id, req.body)
+  Trip.findByIdAndUpdate(req.params.id, req.body, { runValidators: true })
     .then(() => res.redirect(`/trips/${req.params.id}`))
     .catch(next)
   }
 
 module.exports.delete = (req, res, next) => {
-  next();
-} 
+  Trip.findById(req.params.id)
+  .then((trip) => {
+    if(!trip){
+      res.redirect('/trips')
+    } else if (trip.id == req.user.id){
+      trip.delete()
+        .then(() => res.redirect('/trips'))
+        .catch(next);
+    } else {
+      next();
+    }
+  })
+  .catch(next);
+}

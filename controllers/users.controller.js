@@ -54,7 +54,7 @@ module.exports.doUpdate = (req, res, next) => {
   if(req.file){
     req.body.image = req.file.path;
   }
-  User.findByIdAndUpdate(req.params.id, req.body)
+  User.findByIdAndUpdate(req.params.id, req.body, { runValidators: true })
     .then(() => res.redirect('/profile'))
     .catch(next)
 }
