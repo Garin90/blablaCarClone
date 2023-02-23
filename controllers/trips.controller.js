@@ -1,6 +1,7 @@
 //we will need to apply some methods to the model, so we require the trips model
 const { findByIdAndUpdate, findById, rawListeners } = require('../models/trip.model');
 const Trip = require('../models/trip.model');
+const User = require('../models/user.model');
 
 //DEFINING ACTIOS FOR APPLY TO TRIPS DATA BASE
 //Finding all trips to show it into trips list view
@@ -81,3 +82,15 @@ module.exports.book = (req, res, next) => {
   })
   .catch(next)
 }
+
+module.exports.doBook = (req, res, next) => {
+  Trip.findById(req.params.id)
+  .then(() => {
+    req.user.adquiredTrips.push(req.params.id);
+    User.findByIdAndUpdate(req.user.id, req.user)
+      .then(() => res.redirect('/profile/rides'))
+      .catch(next)
+  })
+  .catch(next)
+}
+

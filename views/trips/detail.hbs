@@ -15,15 +15,15 @@
   <h6 class="mb-2 text-muted d-block">{{trip.user.user}}</h6>
 
 
-{{!-- {{#isOwnedBy trip user}} --}}
+{{#isOwnedBy trip currentUser}}
 
-<a href="/trips/edit/{{trip.id}}"><button type="submit" class="btn btn-primary">Edit Trip</button></a>
+<a href="/trips/edit/{{../trip.id}}"><button type="submit" class="btn btn-primary">Edit Trip</button></a>
 
-<form action="/trips/delete/{{trip.id}}" method="POST">
+<form action="/trips/delete/{{../trip.id}}" method="POST">
 <button type="submit" class="btn btn-danger">Delete Trip</button>
 </form>
 
-{{!-- {{/isOwnedBy}} --}}
+{{/isOwnedBy}}
 
 <a class="publish btn btn-primary rounded-pill text-white mb-5 border-0 fw-normal"
   href="/trips/book/{{trip.id}}">Continue

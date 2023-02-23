@@ -5,6 +5,9 @@
   <h6 class="card-subtitle mb-2 text-muted">{{trip.to}}</h6>
 </div>
 
-<a class="publish btn btn-primary rounded-pill text-white mb-5 border-0 fw-normal"
-  href="/trips/book/{{trip.id}}">Pay {{trip.price}}€
-</a>
+<form 
+  action="/trips/book/{{trip.id}}" method="Post">
+  <button class="publish btn btn-primary rounded-pill text-white mb-5 border-0 fw-normal" type="submit">
+    Pay {{trip.price}}€
+  </button>
+</form>

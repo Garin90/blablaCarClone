@@ -62,3 +62,8 @@ module.exports.doUpdate = (req, res, next) => {
 module.exports.rides = (req, res, next) => {
   res.render('users/rides');
 }
+
+module.exports.logout = (req, res, next) => {
+  req.session.destroy();
+  res.redirect('/');
+}

@@ -19,9 +19,10 @@ router.get('/trips/new', secure.isAuthenticated, tripsController.create);
 router.post('/trips/new', secure.isAuthenticated, tripsController.doCreate);
 router.get('/trips/edit/:id', secure.isAuthenticated, tripsController.update);
 router.post('/trips/edit/:id', secure.isAuthenticated, tripsController.doUpdate);
-router.post('/trips/delete/:id', tripsController.delete);
+router.post('/trips/delete/:id', secure.isAuthenticated, tripsController.delete);
 router.get('/trips/:id', tripsController.detail);
 router.get('/trips/book/:id', tripsController.book);
+router.post('/trips/book/:id', tripsController.doBook);
 
 router.get('/users/new', usersController.create);
 router.post('/users/new', usersController.doCreate);
@@ -33,6 +34,8 @@ router.get('/profile/rides', secure.isAuthenticated, usersController.rides)
 
 router.get('/login', usersController.login);
 router.post('/login', usersController.doLogin);
+
+router.get('/logout', usersController.logout);
 
 
 //exporting router for app.js calling.

@@ -45,7 +45,8 @@ const userSchema = new Schema ({
   },
   image: {
     type: String
-  }
+  },
+  adquiredTrips: [{ type: mongoose.Schema.Types.ObjectId, ref:"Trip"}]
 })
 
 //This lines are for encrypting the password before save or post the form.

@@ -4,3 +4,12 @@
 
 
 <p>Find the perfect ride from thousands of destinations, or publish to share your travel costs.</p>
+
+{{#each currentUser.adquiredTrips as |trip|}}
+  
+  <h1>{{trip.from}}</h1>
+  <h1>{{trip.to}}</h1>
+  <h1>{{trip.date}}</h1>
+  <h1>{{trip.seats}}</h1>
+  
+{{/each}}
