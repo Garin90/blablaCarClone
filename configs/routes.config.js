@@ -29,6 +29,7 @@ router.get('/users/', secure.isAuthenticated, secure.isAdmin, usersController.li
 router.get('/profile', secure.isAuthenticated, usersController.profile);
 router.get('/profile/edit', secure.isAuthenticated, usersController.update);
 router.post('/profile/edit/:id', secure.isAuthenticated, storage.single('image'), usersController.doUpdate);
+router.get('/profile/rides', secure.isAuthenticated, usersController.rides)
 
 router.get('/login', usersController.login);
 router.post('/login', usersController.doLogin);

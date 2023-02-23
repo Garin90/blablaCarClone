@@ -58,3 +58,7 @@ module.exports.doUpdate = (req, res, next) => {
     .then(() => res.redirect('/profile'))
     .catch(next)
 }
+
+module.exports.rides = (req, res, next) => {
+  res.render('users/rides');
+}
