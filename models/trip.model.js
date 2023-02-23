@@ -19,7 +19,8 @@ const tripSchema = new Schema({
   },
   price: {
     type: Number,
-    required: true
+    required: true,
+    min: 0
   },
   date: {
     type: String,
@@ -27,10 +28,13 @@ const tripSchema = new Schema({
   },
   seats: {
     type: Number,
-    required: true
+    required: true,
+    min: 1,
+    max: 10
   },
   comments:{
-    type: String
+    type: String,
+    maxLength: [140, 'maximum length 140 chars']
   }
 },
   { timestamps: true }

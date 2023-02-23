@@ -45,17 +45,25 @@ module.exports.update = (req, res, next) => {
 }
 
 module.exports.doUpdate = (req, res, next) => {
-  Trip.findByIdAndUpdate(req.params.id, req.body, { runValidators: true })
-    .then(() => res.redirect(`/trips/${req.params.id}`))
-    .catch(next)
-  }
+  Trip.findById(req.params.id)
+    .then((trip) => {
+      if(!trip){
+        res.redirect('/trips')
+      } else if (trip.user == req.user.id) {
+        trip.update(req.body, { runValidators: true })
+          .then(() => res.redirect(`/trips/${req.params.id}`))
+      } else {
+        next();
+      }
+    }).catch(next)
+}
 
 module.exports.delete = (req, res, next) => {
   Trip.findById(req.params.id)
   .then((trip) => {
     if(!trip){
       res.redirect('/trips')
-    } else if (trip.id == req.user.id){
+    } else if (trip.user == req.user?.id){
       trip.delete()
         .then(() => res.redirect('/trips'))
         .catch(next);
@@ -64,4 +72,12 @@ module.exports.delete = (req, res, next) => {
     }
   })
   .catch(next);
+}
+
+module.exports.book = (req, res, next) => {
+  Trip.findById(req.params.id)
+  .then((trip) => {
+    res.render('trips/book', { trip })
+  })
+  .catch(next)
 }

@@ -1,0 +1,10 @@
+<h1>Trip summary</h1>
+
+<div>
+  <h6 class="card-subtitle mb-2 text-muted">{{trip.from}}</h6>
+  <h6 class="card-subtitle mb-2 text-muted">{{trip.to}}</h6>
+</div>
+
+<a class="publish btn btn-primary rounded-pill text-white mb-5 border-0 fw-normal"
+  href="/trips/book/{{trip.id}}">Pay {{trip.price}}€
+</a>
