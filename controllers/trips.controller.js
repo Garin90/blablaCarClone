@@ -85,12 +85,21 @@ module.exports.book = (req, res, next) => {
 
 module.exports.doBook = (req, res, next) => {
   Trip.findById(req.params.id)
-  .then(() => {
+  .then((trip) => {
     req.user.adquiredTrips.push(req.params.id);
     User.findByIdAndUpdate(req.user.id, req.user)
-      .then(() => res.redirect('/profile/rides'))
-      .catch(next)
+    .then(() => {
+      if(trip.seats <= 0) {
+        next(error);
+      }
+      trip.seats--;
+      Trip.findByIdAndUpdate(req.params.id, { seats: trip.seats })
+        .then(() => next())
+        .catch((error) => console.error(`Subtract seats error: ${error}`));
+      res.redirect('/profile/rides')})
+    .catch(next);
   })
-  .catch(next)
+  .catch(next);
+
 }
 
