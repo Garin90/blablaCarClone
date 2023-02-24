@@ -7,6 +7,9 @@ const Trip = require('../models/trip.model');
 // Requiring model to create the seed
 const User = require('../models/user.model');
 
+//requiring faker for create faker fields
+const { faker } = require('@faker-js/faker');
+
 
 // Creating the seed with the User & trip
 Trip.deleteMany()
@@ -19,21 +22,22 @@ User.deleteMany()
   for (let i = 0; i <= 10; i++) {
     User.create({
       user: `user${i}`,
-      name: `name ${i}`,
-      lastName: `last name ${i}`,
-      birthdate: 16/07/1990, //DB is not saving right this date.
-      email: `email${i}@seeds.com`,
+      name: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+      birthdate: faker.date.birthdate(), //DB is not saving right this date.
+      email: faker.internet.email(),
       password: `12345678`,
+      image: faker.image.avatar()
     })
     .then(user => {
         Trip.create({
           user: user.id,
-          from: `City from ${i}`,
-          to: `City of destiny ${i}`,
-          price: 30,
-          date: `Date ${i}`,
-          seats: 3,
-          comments: `Comment ${i}`,
+          from: faker.address.city(),
+          to: faker.address.city(),
+          price: faker.random.numeric(2),
+          date: faker.date.future(),
+          seats: faker.random.numeric(1),
+          comments: faker.random.words(5),
         }).then((trip) => {
           console.log(`trip ${i} created`)
         }).catch((error) => console.error(error))
@@ -41,11 +45,3 @@ User.deleteMany()
     ).catch((error) => console.error(error))
   }
 });
-
-// User.create({
-//   user: 'admin',
-//   email: 'admin@example.org',
-//   password: `12345678`
-// })
-// .then(() => console.log('admin created'))
-// .catch((error) => console.error(error));

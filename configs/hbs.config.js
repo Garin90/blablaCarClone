@@ -11,3 +11,14 @@ hbs.registerHelper('isOwnedBy', (trip, user, options) => {
     return options.inverse();
   }
 });
+
+hbs.registerHelper('isTripComplete', (seats) => {
+  return true;
+  // console.log(seats);
+  // if(seats <= 0){
+  //   return true;
+  // } else {
+  //   return false;
+  // }
+  // return seats <= 0 ? true : false
+});
