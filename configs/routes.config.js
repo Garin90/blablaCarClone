@@ -22,7 +22,7 @@ router.post('/trips/edit/:id', secure.isAuthenticated, tripsController.doUpdate)
 router.post('/trips/delete/:id', secure.isAuthenticated, tripsController.delete);
 router.get('/trips/:id', tripsController.detail);
 router.get('/trips/book/:id', tripsController.book);
-router.post('/trips/book/:id', tripsController.doBook);
+router.post('/trips/book/:id', secure.isAuthenticated, tripsController.doBook);
 
 router.get('/users/new', usersController.create);
 router.post('/users/new', usersController.doCreate);

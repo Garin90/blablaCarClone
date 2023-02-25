@@ -1,6 +1,7 @@
 const User = require('../models/user.model');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const Trip = require('../models/trip.model');
 
 module.exports.create = (req, res, next) => {
   res.render('users/new');
