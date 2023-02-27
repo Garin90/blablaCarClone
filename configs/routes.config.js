@@ -5,6 +5,7 @@ const router = express.Router();
 const commonsController = require('../controllers/commons.controller');
 const tripsController = require('../controllers/trips.controller');
 const usersController = require('../controllers/users.controller');
+const ratingController = require('../controllers/ratings.controller');
 //We are requiring cloudinary config for be able to play with a profile picture
 const storage = require('./storage.config');
 
@@ -28,6 +29,7 @@ router.get('/users/new', usersController.create);
 router.post('/users/new', usersController.doCreate);
 router.get('/users/', secure.isAuthenticated, secure.isAdmin, usersController.list);
 router.get('/profile', secure.isAuthenticated, usersController.profile);
+router.get('/profile/account', usersController.account)
 router.get('/profile/edit', secure.isAuthenticated, usersController.update);
 router.post('/profile/edit/:id', secure.isAuthenticated, storage.single('image'), usersController.doUpdate);
 router.get('/profile/rides', secure.isAuthenticated, usersController.rides)
@@ -36,6 +38,11 @@ router.get('/login', usersController.login);
 router.post('/login', usersController.doLogin);
 
 router.get('/logout', usersController.logout);
+
+router.get('/users/rating/:id', ratingController.rate);
+router.post('/users/rating/:id', ratingController.doRate);
+
+
 
 
 //exporting router for app.js calling.

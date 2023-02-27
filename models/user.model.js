@@ -49,6 +49,20 @@ const userSchema = new Schema ({
   adquiredTrips: [{ type: mongoose.Schema.Types.ObjectId, ref:"Trip"}]
 })
 
+userSchema.virtual('ratings', {
+  ref: 'Rating',
+  localField: '_id',
+  foreignField: 'user',
+  justOne: false
+})
+
+// userSchema.virtual('ratings', {
+//   ref: 'Rating',
+//   localField: '_id',
+//   foreignField: 'sender',
+//   justOne: false
+// })
+
 //This lines are for encrypting the password before save or post the form.
 //Also, if the user edit the profile and not the password, we ensure that 
 // the password is not hashed again (2 times, 20 loops)
