@@ -39,6 +39,10 @@ require('./configs/hbs.config');
 const router = require('./configs/routes.config');
 app.use(router);
 
+//configuring locals & calling google api key
+const { googleApiKey } = require('./middlewares/locals.mid');
+app.use(googleApiKey);
+
 //errors management
 const errors = require('./middlewares/errors.mid');
 app.use(errors.notFound);
