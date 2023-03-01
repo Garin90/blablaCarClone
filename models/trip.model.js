@@ -1,12 +1,13 @@
-//requiring mongoose & call to mongoose schema method
+// Require mongoose to create a schema
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-//defining the new Trip Schema
-const tripSchema = new Schema({
+
+// Creating a trip schema
+const tripSchema = new Schema ({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     required: true
   },
   from: {
@@ -20,7 +21,17 @@ const tripSchema = new Schema({
   price: {
     type: Number,
     required: true,
-    min: 0
+    min: 0,
+  },
+  seats: {
+    type: Number,
+    required: true,
+    min: 0,
+    max: 5,
+  },
+  comments: {
+    type: String,
+    maxLength: [120, "Max length 140 chars"],
   },
   date: {
     type: String,
@@ -30,22 +41,31 @@ const tripSchema = new Schema({
     type: String,
     required: true
   },
-  seats: {
-    type: Number,
-    required: true,
-    min: 1,
-    max: 10
+  locationFrom: {
+    type: {
+      type: String,
+      enum: ['Point'],
+    },
+    coordinates: {
+      type: [Number]
+    },
   },
-  comments:{
-    type: String,
-    maxLength: [140, 'maximum length 140 chars']
+  locationTo: {
+    type: {
+      type: String,
+      enum: ['Point'],
+    },
+    coordinates: {
+      type: [Number]
+    },
   }
 },
   { timestamps: true }
-)
+);
 
-//Saving on Trip the model created
-const Trip = mongoose.model('Trip',tripSchema);
 
-//Exporting Trip as a model
+tripSchema.index({ locationFrom: '2dsphere', locationTo: '2dsphere'  });
+
+// Export the model to use in the app
+const Trip = mongoose.model('Trip', tripSchema);
 module.exports = Trip;

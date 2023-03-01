@@ -1,7 +1,7 @@
 //we will need to apply some methods to the model, so we require the trips model
-const { findByIdAndUpdate, findById, rawListeners } = require('../models/trip.model');
 const Trip = require('../models/trip.model');
 const User = require('../models/user.model');
+const mongoose = require('mongoose');
 
 //DEFINING ACTIOS FOR APPLY TO TRIPS DATA BASE
 //Finding all trips to show it into trips list view
@@ -27,14 +27,33 @@ module.exports.create = (req, res, next) => {
   res.render('trips/new')
 }
 
-module.exports.doCreate = (req,res,next) => {
-req.body.user = req.user.id;
+module.exports.doCreate = (req, res, next) => {
+  const { latFrom, lngFrom, latTo, lngTo } = req.body;
 
-  Trip.create(req.body)
-  .then(() => {
-    res.redirect('/trips')
-  })
-  .catch(next);
+  const trip = req.body;
+  trip.user = req.user.id;
+
+  if ( latFrom && lngFrom && latTo && lngTo) {
+    trip.locationFrom = {
+      type: 'Point',
+      coordinates: [lngFrom, latFrom]
+    }
+    trip.locationTo = {
+      type: 'Point',
+      coordinates: [lngTo, latTo]
+    }
+  }
+  Trip.create(trip) 
+    .then(() => {
+      res.redirect('/trips')
+    })
+    .catch((error) => {
+      if (error instanceof mongoose.Error.ValidationError) {
+        res.render("trips/new", { errors: error.errors, trip: req.body });
+      } else {
+        next(error);
+      }
+    })
 }
 
 module.exports.update = (req, res, next) => {
@@ -46,17 +65,17 @@ module.exports.update = (req, res, next) => {
 }
 
 module.exports.doUpdate = (req, res, next) => {
-  Trip.findById(req.params.id)
-    .then((trip) => {
-      if(!trip){
-        res.redirect('/trips')
-      } else if (trip.user == req.user.id) {
-        trip.update(req.body, { runValidators: true })
-          .then(() => res.redirect(`/trips/${req.params.id}`))
-      } else {
-        next();
-      }
-    }).catch(next)
+  Trip.findByIdAndUpdate(req.params.id, req.body, { runValidators: true })
+  .then((trip) => {
+    res.redirect(`/trips/${req.params.id}`)
+  })
+  .catch((error) => {
+    if (error instanceof mongoose.Error.ValidationError) {
+      res.render("trips/edit", { errors: error.errors, trip: req.body });
+    } else {
+      next(error);
+    }
+  })
 }
 
 module.exports.delete = (req, res, next) => {
@@ -69,7 +88,7 @@ module.exports.delete = (req, res, next) => {
         .then(() => res.redirect('/trips'))
         .catch(next);
     } else {
-      next();
+      res.redirect('/trips');
     }
   })
   .catch(next);

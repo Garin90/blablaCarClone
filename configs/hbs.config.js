@@ -19,3 +19,8 @@ hbs.registerHelper('isTripComplete', (trip, options) => {
     return options.inverse();
   }
 });
+
+hbs.registerHelper('ratingsAverage', (receivedRatings) => {
+  return Math.round(receivedRatings.map((x) => x = x.rating).reduce((a, b) => a + b, 0) / receivedRatings.length);
+})
+

@@ -35,13 +35,13 @@ app.set('views', `${__dirname}/views`);
 //requiring hbs config for call hbs partials and helpers
 require('./configs/hbs.config');
 
-//Lines for be able to use routes file every http request
-const router = require('./configs/routes.config');
-app.use(router);
-
 //configuring locals & calling google api key
 const { googleApiKey } = require('./middlewares/locals.mid');
 app.use(googleApiKey);
+
+//Lines for be able to use routes file every http request
+const router = require('./configs/routes.config');
+app.use(router);
 
 //errors management
 const errors = require('./middlewares/errors.mid');

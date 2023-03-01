@@ -3,7 +3,6 @@
   <a class="text-decoration-none text-dark fw-bold" href="/profile/account">Ratings</a>
 </div>
 
-
 <div class="mb-3 d-flex align-items-center flex-column">
   <div class="d-flex justify-content-between mb-2"  style="width: 80%;">
     <div>
@@ -13,8 +12,12 @@
       <img class="rounded-circle" src="{{#if currentUser.image}} {{currentUser.image}} {{else}}https://cdn.blablacar.com/kairos/assets/images/default-m-818bf2b20d4b06a052dd..svg{{/if}}" alt="profile" width="120px" height="120px">
     </div>
   </div>
+  {{!-- Rating average --}}
+  <div>
+    <h1>{{ratingsAverage currentUser.receivedRatings}}/5</h1>
+    <h5>Total ratings {{currentUser.receivedRatings.length}}</h5>
+  </div>
 </div>
-
 
 
 <div class="mb-3 d-flex align-items-center flex-column">
@@ -25,13 +28,19 @@
   </div>
 </div>
 
-
-
-
-{{#each currentUser.ratings as |r|}}
-  {{r.rating}}
+{{#each currentUser.receivedRatings as |r|}}
+  <ul>
+    <li>
+      User: {{r.sender.name}}
+    </li>
+    <li>
+       Rate: {{r.rating}}
+    </li>
+    <li>
+      Observations {{r.observations}}
+    </li>
+  </ul>
 {{/each}}
-
 
 
 <div class="mb-3 d-flex align-items-center flex-column">
@@ -42,3 +51,18 @@
   </div>
 </div>
 
+
+
+{{#each currentUser.givenRatings as |r|}}
+  <ul>
+    <li>
+      User: {{r.user.name}}
+    </li>
+    <li>
+       Rate: {{r.rating}}
+    </li>
+    <li>
+      Observations {{r.observations}}
+    </li>
+  </ul>
+{{/each}}

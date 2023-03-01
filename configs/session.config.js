@@ -27,24 +27,34 @@ module.exports.session = session({
 
 //We will create this middleware asign the cookie id founded in data base to the user ID, and get all the user information.
 module.exports.loadSessionUser = (req, res, next) => {
-  const { userId } = req.session;
+  const { userId } = req.session
   if(userId) {
     User.findById(userId)
-    .populate({
-      path: 'adquiredTrips',
-      populate: {
-        path: 'user'
-      }
-    })
-    .populate('ratings')
-    .then((user) => {
-      req.user = user;
-      res.locals.currentUser = user
-      next()
-    })
-    .catch(next)
+      .populate({
+        path: 'adquiredTrips',
+        populate: {
+          path: 'user'
+        }
+      })
+      .populate({
+        path: 'receivedRatings',
+        populate: {
+          path: 'sender'
+        }
+      })
+      .populate({
+        path: 'givenRatings',
+        populate: {
+          path: 'user'
+        }
+      })
+      .then((user) => {
+        req.user = user
+        res.locals.currentUser = user
+        next()
+      })
+      .catch(next)
   } else {
-    next();
+    next()
   }
-
 }
