@@ -46,7 +46,8 @@ const userSchema = new Schema ({
   image: {
     type: String
   },
-  adquiredTrips: [{ type: mongoose.Schema.Types.ObjectId, ref:"Trip"}]
+  adquiredTrips: [{ type: mongoose.Schema.Types.ObjectId, ref:"Trip"}],
+  adquiredChats: [{ type: mongoose.Schema.Types.ObjectId, ref:"User"}]
 })
 
 userSchema.virtual('receivedRatings', {
