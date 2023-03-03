@@ -20,7 +20,9 @@ hbs.registerHelper('isTripComplete', (trip, options) => {
   }
 });
 
-hbs.registerHelper('ratingsAverage', (receivedRatings) => {
-  return Math.round(receivedRatings.map((x) => x = x.rating).reduce((a, b) => a + b, 0) / receivedRatings.length);
+hbs.registerHelper('ratingAverage', (receivedRatings) => {
+  console.log(`Received ratings ${receivedRatings}`);
+  return Math.round(receivedRatings.map(x => x = x.rating).reduce((a, b) => a + b, 0) / receivedRatings.length);
 })
+
 

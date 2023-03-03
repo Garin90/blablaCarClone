@@ -36,8 +36,9 @@ app.set('views', `${__dirname}/views`);
 require('./configs/hbs.config');
 
 //configuring locals & calling google api key
-const { googleApiKey } = require('./middlewares/locals.mid');
+const { googleApiKey, query } = require('./middlewares/locals.mid');
 app.use(googleApiKey);
+app.use(query);
 
 //Lines for be able to use routes file every http request
 const router = require('./configs/routes.config');

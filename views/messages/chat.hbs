@@ -1,0 +1,9 @@
+{{#each messages as |message|}}
+  <h1>FROM: {{message.from.name}}</h1>
+  <h1>{{message.message}}</h1>
+{{/each}}
+
+<form action="/users/chat/{{userId}}" method="POST">
+  <textarea type="text" name="message" cols="30" rows="10"></textarea>
+  <button type="submit"> Send </button>
+</form>

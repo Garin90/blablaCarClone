@@ -1,18 +1,19 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const MessageSchema = new Schema ({
-  driver: {
+const messageSchema = new Schema ({
+  from: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true
   },
-  passenger: {
+  to: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true
   },
   message: {
-    type: String
+    type: String,
+    required: true
   }
 });
 

@@ -6,13 +6,53 @@ const mongoose = require('mongoose');
 //DEFINING ACTIOS FOR APPLY TO TRIPS DATA BASE
 //Finding all trips to show it into trips list view
 module.exports.list = (req, res, next) => {
-  Trip.find()
-  .populate('user')
-  .then((trips) => {
-    res.render('trips/list', { trips });
-  })
-  .catch(next);
+  const { latFrom, lngFrom, latTo, lngTo, seats, date } = req.query;
+  const criterial = {};
+
+  criterial.seats = seats;
+  criterial.date = date;
+  const fromNear = {
+    $near: {
+      $geometry: {
+        type: "Point",
+        coordinates: [lngFrom, latFrom]
+      },
+      $maxDistance: 50000
+    }
+  }
+
+  const toNear = {
+    $near: {
+      $geometry: {
+        type: "Point",
+        coordinates: [lngTo, latTo]
+      },
+      $maxDistance: 50000
+    }
+  }
+  
+criterial.locationFrom = fromNear
+
+
+  Trip.find(criterial)
+    .then((trips) => {
+      return Trip.find({
+        locationTo: toNear,
+        _id: { $in: trips.map(x => x._id) }
+      })
+      .populate({
+        path: 'user',
+        populate: {
+          path: 'receivedRatings'
+        }
+      })
+    })
+    .then(trips => {
+      res.render('trips/list', { trips })
+    })
+    .catch(next)
 }
+
 
 module.exports.detail = (req, res, next) => {
   Trip.findById(req.params.id)
@@ -120,5 +160,18 @@ module.exports.doBook = (req, res, next) => {
   })
   .catch(next);
 
+}
+
+module.exports.all = (req, res,next) => {
+  Trip.find()
+  .populate({
+    path: 'user',
+      populate: {
+        path: 'receivedRatings'}
+  })
+  .then((trips) => {
+    res.render('trips/all', { trips })
+  })
+  .catch(next);
 }
 

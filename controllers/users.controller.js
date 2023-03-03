@@ -69,6 +69,6 @@ module.exports.logout = (req, res, next) => {
   res.redirect('/');
 }
 
-module.exports.ratings = (re, res, next) => {
+module.exports.ratings = (re, res, next) => { 
   res.render('users/ratings')
 }

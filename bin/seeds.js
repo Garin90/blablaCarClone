@@ -15,7 +15,8 @@ const { faker } = require('@faker-js/faker');
 Trip.deleteMany()
 .then(() => console.log('trips deleted'))
 .catch((error) => console.error(error));
-
+// citires [barcelona]
+// const points = [[0,0], [0,0], [0,0]]
 
 User.deleteMany()
 .then(() => {
@@ -39,6 +40,14 @@ User.deleteMany()
           departureTime: `${Math.floor(Math.random() * 24)}:${Math.floor(Math.random() * 60)}`,
           seats: faker.random.numeric(1),
           comments: faker.random.words(5),
+          locationFrom: {
+            type: 'Point',
+            coordinates: [0,0]
+          },
+          locationTo: {
+            type: 'Point',
+            coordinates: [0,0]
+          }
         }).then((trip) => {
           console.log(`trip ${i} created`)
         }).catch((error) => console.error(error))
